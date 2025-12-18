@@ -1,0 +1,270 @@
+{
+  "common": {
+    "loading": "Carregando...",
+    "save": "Salvar",
+    "saveChanges": "Salvar Alterações",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Excluir",
+    "close": "Fechar",
+    "submit": "Enviar",
+    "approve": "Aprovar",
+    "reject": "Rejeitar",
+    "create": "Criar",
+    "update": "Atualizar",
+    "confirm": "Confirmar",
+    "back": "Voltar",
+    "next": "Próximo",
+    "search": "Pesquisar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "actions": "Ações",
+    "status": "Status",
+    "category": "Categoria",
+    "notes": "Notas",
+    "date": "Data",
+    "error": "Erro",
+    "success": "Sucesso",
+    "warning": "Aviso",
+    "info": "Informação",
+    "retry": "Tentar Novamente",
+    "previous": "Anterior",
+    "showing": "Mostrando"
+  },
+  "nav": {
+    "dashboard": "Painel",
+    "search": "Pesquisar",
+    "tracking": "Rastreamento",
+    "review": "Revisar",
+    "feedback": "Feedback",
+    "profile": "Perfil",
+    "logout": "Sair"
+  },
+  "capture": {
+    "title": "Captura",
+    "plural": "Capturas",
+    "create": "Criar Nova Captura",
+    "update": "Atualizar Captura",
+    "review": "Revisar Captura",
+    "accepted": "Captura aceita com sucesso",
+    "rejected": "Captura rejeitada com sucesso",
+    "saved": "Alterações salvas com sucesso",
+    "failed": "Falha ao {{action}} captura",
+    "failedToLoad": "Falha ao carregar capturas",
+    "failedToApprove": "Falha ao aprovar captura",
+    "failedToReject": "Falha ao rejeitar captura",
+    "failedToUpdate": "Falha ao atualizar captura",
+    "notFound": "Captura não encontrada",
+    "none": "Nenhuma captura",
+    "noResults": "Nenhuma captura corresponde a \"{{query}}\"",
+    "noFlagged": "Nenhuma captura sinalizada",
+    "content": "Conteúdo",
+    "summary": "Resumo",
+    "rawContent": "Conteúdo Bruto",
+    "aiSummary": "Resumo gerado por IA..."
+  },
+  "search": {
+    "title": "Pesquisar",
+    "placeholder": "Pergunte qualquer coisa sobre suas capturas...",
+    "description": "Use linguagem natural para encontrar qualquer coisa em suas capturas",
+    "startSearching": "Começar a pesquisar",
+    "startSearchingDescription": "Digite uma consulta para pesquisar suas capturas. Tente fazer perguntas em linguagem natural...",
+    "noResults": "Nenhum resultado encontrado",
+    "noResultsDescription": "Tente ajustar sua pesquisa ou filtros.",
+    "searchFailed": "Pesquisa falhou",
+    "searchFailedDescription": "Por favor, tente novamente ou entre em contato com o suporte se o problema persistir.",
+    "failedToSearch": "Falha ao pesquisar capturas"
+  },
+  "review": {
+    "title": "Revisar Conteúdo Sinalizado",
+    "description": "Revise capturas que requerem aprovação manual",
+    "stats": {
+      "pending": "Pendente",
+      "approved": "Aprovado",
+      "rejected": "Rejeitado",
+      "critical": "Crítico"
+    },
+    "filters": {
+      "all": "Todos",
+      "pending": "Pendente",
+      "approved": "Aprovado",
+      "rejected": "Rejeitado"
+    },
+    "reason": "Motivo",
+    "reasonPlaceholder": "Por favor, forneça um motivo para rejeitar esta captura (mínimo 10 caracteres)...",
+    "reasonRequired": "Por favor, forneça um motivo para rejeição (mínimo 10 caracteres)",
+    "approved": "Captura aprovada com sucesso",
+    "rejected": "Captura rejeitada com sucesso",
+    "failed": "Ocorreu um erro",
+    "noFlagged": "Nenhuma captura sinalizada"
+  },
+  "category": {
+    "title": "Categoria",
+    "placeholder": "Digite para pesquisar ou criar nova...",
+    "existing": "Categorias Existentes",
+    "createNew": "Criar Nova",
+    "helper": "Selecione de categorias existentes ou digite para criar uma nova",
+    "noCategories": "Nenhuma categoria encontrada",
+    "typeToCreate": "Digite para criar uma nova categoria",
+    "updated": "Categoria atualizada com sucesso"
+  },
+  "feedback": {
+    "title": "Feedback",
+    "submit": "Enviar Feedback",
+    "placeholder": "Conte-nos o que você pensa... (mínimo 10 caracteres)",
+    "loginRequired": "Você deve estar logado para enviar feedback",
+    "submitted": "Feedback enviado! Vamos revisá-lo em breve.",
+    "failed": "Falha ao enviar feedback",
+    "error": "Ocorreu um erro inesperado",
+    "noFeedback": "Nenhum feedback ainda",
+    "noFeedbackDescription": "Seja o primeiro a compartilhar seus pensamentos!",
+    "type": {
+      "bug": "Relatar Bug",
+      "feature": "Solicitação de Recurso",
+      "general": "Feedback Geral"
+    }
+  },
+  "profile": {
+    "title": "Configurações de Perfil",
+    "loading": "Carregando perfil...",
+    "saving": "Salvando...",
+    "saved": "Perfil atualizado com sucesso",
+    "failed": "Falha ao atualizar perfil",
+    "error": "Falha ao carregar perfil. O endpoint da API de perfil pode não estar disponível ainda.",
+    "preferences": "Preferências",
+    "timezone": "Fuso Horário",
+    "timezoneHelper": "Fuso horário IANA (ex: America/Sao_Paulo, Europe/Lisbon)",
+    "timezonePlaceholder": "America/Sao_Paulo",
+    "language": "Idioma",
+    "languageHelper": "Código do idioma (ex: en, es, pt)",
+    "languagePlaceholder": "pt",
+    "digestTime": "Horário do Resumo Diário",
+    "digestTimeHelper": "Horário para receber seu email de resumo diário",
+    "notifications": "Notificações",
+    "emailDigest": "Resumo por Email",
+    "emailDigestHelper": "Receber emails de resumo diário",
+    "instantNotifications": "Notificações Instantâneas",
+    "instantNotificationsHelper": "Ser notificado imediatamente para atualizações importantes",
+    "reminderAlerts": "Alertas de Lembrete",
+    "reminderAlertsHelper": "Receber notificações para lembretes"
+  },
+  "reminder": {
+    "title": "Lembrete",
+    "plural": "Lembretes",
+    "edit": "Editar Lembrete",
+    "add": "Adicionar Lembrete",
+    "snooze": "Adiar lembrete",
+    "dismiss": "Dispensar lembrete",
+    "message": "Mensagem do Lembrete",
+    "messagePlaceholder": "Digite a mensagem do lembrete...",
+    "time": "Horário do Lembrete",
+    "updated": "Lembrete atualizado com sucesso",
+    "dismissed": "Lembrete dispensado",
+    "snoozed": "Lembrete adiado",
+    "hasReminder": "Tem lembrete"
+  },
+  "tracking": {
+    "title": "Rastreamento de Encomenda",
+    "addCheckpoint": "Adicionar Ponto de Verificação",
+    "markCompleted": "Marcar como concluído",
+    "location": "Localização",
+    "locationPlaceholder": "ex: São Paulo, SP ou Centro de Processamento",
+    "description": "Descrição",
+    "descriptionPlaceholder": "Informações adicionais do ponto de verificação...",
+    "hasTracking": "Tem rastreamento de encomenda",
+    "checkpointAdded": "Ponto de verificação adicionado com sucesso",
+    "completed": "Encomenda marcada como concluída"
+  },
+  "auth": {
+    "login": "Entrar",
+    "logout": "Sair",
+    "loginRequired": "Por favor, faça login para continuar",
+    "loginFailed": "Falha no login",
+    "logoutFailed": "Falha ao sair"
+  },
+  "modal": {
+    "close": "Fechar"
+  },
+  "toast": {
+    "error": "Erro",
+    "success": "Sucesso",
+    "warning": "Aviso",
+    "info": "Informação"
+  },
+  "time": {
+    "today": "Hoje",
+    "yesterday": "Ontem",
+    "thisWeek": "Esta Semana",
+    "lastWeek": "Semana Passada",
+    "thisMonth": "Este Mês",
+    "older": "Mais Antigo",
+    "noItems": "Nenhum item"
+  },
+  "dashboard": {
+    "loading": "Carregando seus itens de ação...",
+    "refreshing": "Atualizando...",
+    "failedToLoad": "Falha ao carregar itens",
+    "noItemsYet": "Nenhum item ainda",
+    "allCaughtUp": "Você está em dia! Novos itens de ação aparecerão aqui."
+  },
+  "app": {
+    "loading": "Carregando..."
+  },
+  "newDumpModal": {
+    "title": "Criar Nova Captura",
+    "textInput": "Entrada de Texto",
+    "fileUpload": "Upload de Arquivo",
+    "content": "Conteúdo",
+    "pasteText": "Cole seu texto, e-mail ou nota aqui...",
+    "aiExtractInfo": "A IA extrairá automaticamente informações importantes",
+    "pleaseEnterText": "Por favor, insira algum texto",
+    "pleaseSelectFile": "Por favor, selecione um arquivo",
+    "failedToCreateDump": "Falha ao criar captura",
+    "failedToUploadFile": "Falha ao enviar arquivo",
+    "userNotAuthenticated": "Usuário não autenticado"
+  },
+  "myFeedback": {
+    "loading": "Carregando seu feedback...",
+    "noFeedbackYet": "Nenhum feedback ainda",
+    "noFeedbackMessage": "Você ainda não enviou nenhum feedback. Compartilhe seus pensamentos para nos ajudar a melhorar!"
+  },
+  "trackingPage": {
+    "title": "Lembretes e Rastreamento",
+    "subtitle": "Gerencie seus lembretes ativos e itens rastreáveis",
+    "loading": "Carregando lembretes e rastreamento...",
+    "noItems": "Nenhum lembrete ou item de rastreamento",
+    "noItemsMessage": "Seus lembretes ativos e itens rastreáveis aparecerão aqui.",
+    "reminders": "Lembretes",
+    "trackableItems": "Itens Rastreáveis",
+    "noActiveReminders": "Nenhum lembrete ativo",
+    "noActiveTracking": "Nenhum item rastreável ativo"
+  },
+  "feedbackPage": {
+    "title": "Feedback",
+    "subtitle": "Ajude-nos a melhorar compartilhando seus pensamentos, relatando bugs ou sugerindo novos recursos."
+  },
+  "dashboardTitle": {
+    "dailyActionItems": "Itens de Ação Diários",
+    "itemsToReview": "{{count}} item para revisar",
+    "itemsToReview_other": "{{count}} itens para revisar",
+    "hideActions": "Ocultar Ações",
+    "showActions": "Mostrar Ações"
+  },
+  "feedbackForm": {
+    "title": "Compartilhe Seu Feedback",
+    "category": "Categoria",
+    "selectCategory": "Selecione uma categoria...",
+    "bugReport": "Relatório de Bug",
+    "featureRequest": "Solicitação de Recurso",
+    "generalFeedback": "Feedback Geral",
+    "rating": "Avaliação",
+    "message": "Mensagem",
+    "charactersCount": "{{count}} caracteres (mínimo de 10 necessários)",
+    "star": "estrela",
+    "stars": "estrelas",
+    "submitFeedback": "Enviar Feedback",
+    "pleaseSelectCategory": "Por favor, selecione uma categoria de feedback",
+    "messageTooShort": "A mensagem deve ter pelo menos 10 caracteres",
+    "pleaseProvideRating": "Por favor, forneça uma avaliação entre 1 e 5 estrelas"
+  }
+}

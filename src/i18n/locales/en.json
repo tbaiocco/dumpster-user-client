@@ -1,0 +1,270 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "saveChanges": "Save Changes",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "delete": "Delete",
+    "close": "Close",
+    "submit": "Submit",
+    "approve": "Approve",
+    "reject": "Reject",
+    "create": "Create",
+    "update": "Update",
+    "confirm": "Confirm",
+    "back": "Back",
+    "next": "Next",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "actions": "Actions",
+    "status": "Status",
+    "category": "Category",
+    "notes": "Notes",
+    "date": "Date",
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Info",
+    "retry": "Retry",
+    "previous": "Previous",
+    "showing": "Showing"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "search": "Search",
+    "tracking": "Tracking",
+    "review": "Review",
+    "feedback": "Feedback",
+    "profile": "Profile",
+    "logout": "Log Out"
+  },
+  "capture": {
+    "title": "Capture",
+    "plural": "Captures",
+    "create": "Create New Capture",
+    "update": "Update Capture",
+    "review": "Review Capture",
+    "accepted": "Capture accepted successfully",
+    "rejected": "Capture rejected successfully",
+    "saved": "Changes saved successfully",
+    "failed": "Failed to {{action}} capture",
+    "failedToLoad": "Failed to load captures",
+    "failedToApprove": "Failed to approve capture",
+    "failedToReject": "Failed to reject capture",
+    "failedToUpdate": "Failed to update capture",
+    "notFound": "Capture not found",
+    "none": "No captures",
+    "noResults": "No captures match \"{{query}}\"",
+    "noFlagged": "No flagged captures",
+    "content": "Content",
+    "summary": "Summary",
+    "rawContent": "Raw Content",
+    "aiSummary": "AI-generated summary..."
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Ask anything about your captures...",
+    "description": "Use natural language to find anything in your captures",
+    "startSearching": "Start searching",
+    "startSearchingDescription": "Enter a query to search your captures. Try asking natural language questions...",
+    "noResults": "No results found",
+    "noResultsDescription": "Try adjusting your search or filters.",
+    "searchFailed": "Search failed",
+    "searchFailedDescription": "Please try again or contact support if the problem persists.",
+    "failedToSearch": "Failed to search captures"
+  },
+  "review": {
+    "title": "Review Flagged Content",
+    "description": "Review captures that require manual approval",
+    "stats": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "critical": "Critical"
+    },
+    "filters": {
+      "all": "All",
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "reason": "Reason",
+    "reasonPlaceholder": "Please provide a reason for rejecting this capture (minimum 10 characters)...",
+    "reasonRequired": "Please provide a reason for rejection (minimum 10 characters)",
+    "approved": "Capture approved successfully",
+    "rejected": "Capture rejected successfully",
+    "failed": "An error occurred",
+    "noFlagged": "No flagged captures"
+  },
+  "category": {
+    "title": "Category",
+    "placeholder": "Type to search or create new...",
+    "existing": "Existing Categories",
+    "createNew": "Create New",
+    "helper": "Select from existing categories or type to create a new one",
+    "noCategories": "No categories found",
+    "typeToCreate": "Type to create a new category",
+    "updated": "Category updated successfully"
+  },
+  "feedback": {
+    "title": "Feedback",
+    "submit": "Submit Feedback",
+    "placeholder": "Tell us what you think... (minimum 10 characters)",
+    "loginRequired": "You must be logged in to submit feedback",
+    "submitted": "Feedback submitted! We'll review it soon.",
+    "failed": "Failed to submit feedback",
+    "error": "An unexpected error occurred",
+    "noFeedback": "No feedback yet",
+    "noFeedbackDescription": "Be the first to share your thoughts!",
+    "type": {
+      "bug": "Bug Report",
+      "feature": "Feature Request",
+      "general": "General Feedback"
+    }
+  },
+  "profile": {
+    "title": "Profile Settings",
+    "loading": "Loading profile...",
+    "saving": "Saving...",
+    "saved": "Profile updated successfully",
+    "failed": "Failed to update profile",
+    "error": "Failed to load profile. The profile API endpoint may not be available yet.",
+    "preferences": "Preferences",
+    "timezone": "Timezone",
+    "timezoneHelper": "IANA timezone (e.g., America/New_York, Europe/London)",
+    "timezonePlaceholder": "America/New_York",
+    "language": "Language",
+    "languageHelper": "Language code (e.g., en, es, pt)",
+    "languagePlaceholder": "en",
+    "digestTime": "Daily Digest Time",
+    "digestTimeHelper": "Time to receive your daily digest email",
+    "notifications": "Notifications",
+    "emailDigest": "Email Digest",
+    "emailDigestHelper": "Receive daily summary emails",
+    "instantNotifications": "Instant Notifications",
+    "instantNotificationsHelper": "Get notified immediately for important updates",
+    "reminderAlerts": "Reminder Alerts",
+    "reminderAlertsHelper": "Receive notifications for reminders"
+  },
+  "reminder": {
+    "title": "Reminder",
+    "plural": "Reminders",
+    "edit": "Edit Reminder",
+    "add": "Add Reminder",
+    "snooze": "Snooze reminder",
+    "dismiss": "Dismiss reminder",
+    "message": "Reminder Message",
+    "messagePlaceholder": "Enter reminder message...",
+    "time": "Reminder Time",
+    "updated": "Reminder updated successfully",
+    "dismissed": "Reminder dismissed",
+    "snoozed": "Reminder snoozed",
+    "hasReminder": "Has reminder"
+  },
+  "tracking": {
+    "title": "Package Tracking",
+    "addCheckpoint": "Add Tracking Checkpoint",
+    "markCompleted": "Mark as completed",
+    "location": "Location",
+    "locationPlaceholder": "e.g., Memphis, TN or Processing Center",
+    "description": "Description",
+    "descriptionPlaceholder": "Additional checkpoint information...",
+    "hasTracking": "Has package tracking",
+    "checkpointAdded": "Checkpoint added successfully",
+    "completed": "Package marked as completed"
+  },
+  "auth": {
+    "login": "Login",
+    "logout": "Logout",
+    "loginRequired": "Please login to continue",
+    "loginFailed": "Login failed",
+    "logoutFailed": "Logout failed"
+  },
+  "modal": {
+    "close": "Close"
+  },
+  "toast": {
+    "error": "Error",
+    "success": "Success",
+    "warning": "Warning",
+    "info": "Info"
+  },
+  "time": {
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "thisWeek": "This Week",
+    "lastWeek": "Last Week",
+    "thisMonth": "This Month",
+    "older": "Older",
+    "noItems": "No items"
+  },
+  "dashboard": {
+    "loading": "Loading your action items...",
+    "refreshing": "Refreshing...",
+    "failedToLoad": "Failed to load items",
+    "noItemsYet": "No items yet",
+    "allCaughtUp": "You're all caught up! New action items will appear here."
+  },
+  "app": {
+    "loading": "Loading..."
+  },
+  "newDumpModal": {
+    "title": "Create New Dump",
+    "textInput": "Text Input",
+    "fileUpload": "File Upload",
+    "content": "Content",
+    "pasteText": "Paste your text, email, or note here...",
+    "aiExtractInfo": "AI will automatically extract important information",
+    "pleaseEnterText": "Please enter some text",
+    "pleaseSelectFile": "Please select a file",
+    "failedToCreateDump": "Failed to create dump",
+    "failedToUploadFile": "Failed to upload file",
+    "userNotAuthenticated": "User not authenticated"
+  },
+  "myFeedback": {
+    "loading": "Loading your feedback...",
+    "noFeedbackYet": "No feedback yet",
+    "noFeedbackMessage": "You haven't submitted any feedback. Share your thoughts to help us improve!"
+  },
+  "trackingPage": {
+    "title": "Reminders & Tracking",
+    "subtitle": "Manage your active reminders and trackable items",
+    "loading": "Loading reminders and tracking...",
+    "noItems": "No reminders or tracking items",
+    "noItemsMessage": "Your active reminders and trackable items will appear here.",
+    "reminders": "Reminders",
+    "trackableItems": "Trackable Items",
+    "noActiveReminders": "No active reminders",
+    "noActiveTracking": "No active trackable items"
+  },
+  "feedbackPage": {
+    "title": "Feedback",
+    "subtitle": "Help us improve by sharing your thoughts, reporting bugs, or suggesting new features."
+  },
+  "dashboardTitle": {
+    "dailyActionItems": "Daily Action Items",
+    "itemsToReview": "{{count}} item to review",
+    "itemsToReview_other": "{{count}} items to review",
+    "hideActions": "Hide Actions",
+    "showActions": "Show Actions"
+  },
+  "feedbackForm": {
+    "title": "Share Your Feedback",
+    "category": "Category",
+    "selectCategory": "Select a category...",
+    "bugReport": "Bug Report",
+    "featureRequest": "Feature Request",
+    "generalFeedback": "General Feedback",
+    "rating": "Rating",
+    "message": "Message",
+    "charactersCount": "{{count}} characters (minimum 10 required)",
+    "star": "star",
+    "stars": "stars",
+    "submitFeedback": "Submit Feedback",
+    "pleaseSelectCategory": "Please select a feedback category",
+    "messageTooShort": "Message must be at least 10 characters",
+    "pleaseProvideRating": "Please provide a rating between 1 and 5 stars"
+  }
+}

@@ -1,0 +1,270 @@
+{
+  "common": {
+    "loading": "Cargando...",
+    "save": "Guardar",
+    "saveChanges": "Guardar Cambios",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "close": "Cerrar",
+    "submit": "Enviar",
+    "approve": "Aprobar",
+    "reject": "Rechazar",
+    "create": "Crear",
+    "update": "Actualizar",
+    "confirm": "Confirmar",
+    "back": "Volver",
+    "next": "Siguiente",
+    "search": "Buscar",
+    "filter": "Filtrar",
+    "sort": "Ordenar",
+    "actions": "Acciones",
+    "status": "Estado",
+    "category": "Categoría",
+    "notes": "Notas",
+    "date": "Fecha",
+    "error": "Error",
+    "success": "Éxito",
+    "warning": "Advertencia",
+    "info": "Información",
+    "retry": "Reintentar",
+    "previous": "Anterior",
+    "showing": "Mostrando"
+  },
+  "nav": {
+    "dashboard": "Panel",
+    "search": "Buscar",
+    "tracking": "Seguimiento",
+    "review": "Revisar",
+    "feedback": "Comentarios",
+    "profile": "Perfil",
+    "logout": "Cerrar Sesión"
+  },
+  "capture": {
+    "title": "Captura",
+    "plural": "Capturas",
+    "create": "Crear Nueva Captura",
+    "update": "Actualizar Captura",
+    "review": "Revisar Captura",
+    "accepted": "Captura aceptada exitosamente",
+    "rejected": "Captura rechazada exitosamente",
+    "saved": "Cambios guardados exitosamente",
+    "failed": "Error al {{action}} captura",
+    "failedToLoad": "Error al cargar capturas",
+    "failedToApprove": "Error al aprobar captura",
+    "failedToReject": "Error al rechazar captura",
+    "failedToUpdate": "Error al actualizar captura",
+    "notFound": "Captura no encontrada",
+    "none": "Sin capturas",
+    "noResults": "Ninguna captura coincide con \"{{query}}\"",
+    "noFlagged": "Sin capturas marcadas",
+    "content": "Contenido",
+    "summary": "Resumen",
+    "rawContent": "Contenido Original",
+    "aiSummary": "Resumen generado por IA..."
+  },
+  "search": {
+    "title": "Buscar",
+    "placeholder": "Pregunta cualquier cosa sobre tus capturas...",
+    "description": "Usa lenguaje natural para encontrar cualquier cosa en tus capturas",
+    "startSearching": "Comenzar búsqueda",
+    "startSearchingDescription": "Ingresa una consulta para buscar en tus capturas. Intenta hacer preguntas en lenguaje natural...",
+    "noResults": "No se encontraron resultados",
+    "noResultsDescription": "Intenta ajustar tu búsqueda o filtros.",
+    "searchFailed": "Búsqueda fallida",
+    "searchFailedDescription": "Por favor, intenta nuevamente o contacta a soporte si el problema persiste.",
+    "failedToSearch": "Error al buscar capturas"
+  },
+  "review": {
+    "title": "Revisar Contenido Marcado",
+    "description": "Revisa capturas que requieren aprobación manual",
+    "stats": {
+      "pending": "Pendiente",
+      "approved": "Aprobado",
+      "rejected": "Rechazado",
+      "critical": "Crítico"
+    },
+    "filters": {
+      "all": "Todos",
+      "pending": "Pendiente",
+      "approved": "Aprobado",
+      "rejected": "Rechazado"
+    },
+    "reason": "Motivo",
+    "reasonPlaceholder": "Por favor, proporciona un motivo para rechazar esta captura (mínimo 10 caracteres)...",
+    "reasonRequired": "Por favor, proporciona un motivo para el rechazo (mínimo 10 caracteres)",
+    "approved": "Captura aprobada exitosamente",
+    "rejected": "Captura rechazada exitosamente",
+    "failed": "Ocurrió un error",
+    "noFlagged": "Sin capturas marcadas"
+  },
+  "category": {
+    "title": "Categoría",
+    "placeholder": "Escribe para buscar o crear nueva...",
+    "existing": "Categorías Existentes",
+    "createNew": "Crear Nueva",
+    "helper": "Selecciona de categorías existentes o escribe para crear una nueva",
+    "noCategories": "No se encontraron categorías",
+    "typeToCreate": "Escribe para crear una nueva categoría",
+    "updated": "Categoría actualizada exitosamente"
+  },
+  "feedback": {
+    "title": "Comentarios",
+    "submit": "Enviar Comentarios",
+    "placeholder": "Cuéntanos qué piensas... (mínimo 10 caracteres)",
+    "loginRequired": "Debes iniciar sesión para enviar comentarios",
+    "submitted": "¡Comentarios enviados! Los revisaremos pronto.",
+    "failed": "Error al enviar comentarios",
+    "error": "Ocurrió un error inesperado",
+    "noFeedback": "Sin comentarios aún",
+    "noFeedbackDescription": "¡Sé el primero en compartir tus pensamientos!",
+    "type": {
+      "bug": "Reporte de Error",
+      "feature": "Solicitud de Función",
+      "general": "Comentarios Generales"
+    }
+  },
+  "profile": {
+    "title": "Configuración de Perfil",
+    "loading": "Cargando perfil...",
+    "saving": "Guardando...",
+    "saved": "Perfil actualizado exitosamente",
+    "failed": "Error al actualizar perfil",
+    "error": "Error al cargar perfil. El endpoint de la API de perfil puede no estar disponible aún.",
+    "preferences": "Preferencias",
+    "timezone": "Zona Horaria",
+    "timezoneHelper": "Zona horaria IANA (ej: America/Mexico_City, Europe/Madrid)",
+    "timezonePlaceholder": "America/Mexico_City",
+    "language": "Idioma",
+    "languageHelper": "Código de idioma (ej: en, es, pt)",
+    "languagePlaceholder": "es",
+    "digestTime": "Hora del Resumen Diario",
+    "digestTimeHelper": "Hora para recibir tu correo de resumen diario",
+    "notifications": "Notificaciones",
+    "emailDigest": "Resumen por Correo",
+    "emailDigestHelper": "Recibir correos de resumen diario",
+    "instantNotifications": "Notificaciones Instantáneas",
+    "instantNotificationsHelper": "Recibir notificaciones inmediatas para actualizaciones importantes",
+    "reminderAlerts": "Alertas de Recordatorio",
+    "reminderAlertsHelper": "Recibir notificaciones para recordatorios"
+  },
+  "reminder": {
+    "title": "Recordatorio",
+    "plural": "Recordatorios",
+    "edit": "Editar Recordatorio",
+    "add": "Agregar Recordatorio",
+    "snooze": "Posponer recordatorio",
+    "dismiss": "Descartar recordatorio",
+    "message": "Mensaje del Recordatorio",
+    "messagePlaceholder": "Ingresa el mensaje del recordatorio...",
+    "time": "Hora del Recordatorio",
+    "updated": "Recordatorio actualizado exitosamente",
+    "dismissed": "Recordatorio descartado",
+    "snoozed": "Recordatorio pospuesto",
+    "hasReminder": "Tiene recordatorio"
+  },
+  "tracking": {
+    "title": "Seguimiento de Paquete",
+    "addCheckpoint": "Agregar Punto de Control",
+    "markCompleted": "Marcar como completado",
+    "location": "Ubicación",
+    "locationPlaceholder": "ej: Ciudad de México, CDMX o Centro de Procesamiento",
+    "description": "Descripción",
+    "descriptionPlaceholder": "Información adicional del punto de control...",
+    "hasTracking": "Tiene seguimiento de paquete",
+    "checkpointAdded": "Punto de control agregado exitosamente",
+    "completed": "Paquete marcado como completado"
+  },
+  "auth": {
+    "login": "Iniciar Sesión",
+    "logout": "Cerrar Sesión",
+    "loginRequired": "Por favor, inicia sesión para continuar",
+    "loginFailed": "Error al iniciar sesión",
+    "logoutFailed": "Error al cerrar sesión"
+  },
+  "modal": {
+    "close": "Cerrar"
+  },
+  "toast": {
+    "error": "Error",
+    "success": "Éxito",
+    "warning": "Advertencia",
+    "info": "Información"
+  },
+  "time": {
+    "today": "Hoy",
+    "yesterday": "Ayer",
+    "thisWeek": "Esta Semana",
+    "lastWeek": "Semana Pasada",
+    "thisMonth": "Este Mes",
+    "older": "Más Antiguo",
+    "noItems": "Sin elementos"
+  },
+  "dashboard": {
+    "loading": "Cargando sus elementos de acción...",
+    "refreshing": "Actualizando...",
+    "failedToLoad": "Error al cargar elementos",
+    "noItemsYet": "Aún no hay elementos",
+    "allCaughtUp": "¡Estás al día! Los nuevos elementos de acción aparecerán aquí."
+  },
+  "app": {
+    "loading": "Cargando..."
+  },
+  "newDumpModal": {
+    "title": "Crear Nueva Captura",
+    "textInput": "Entrada de Texto",
+    "fileUpload": "Subir Archivo",
+    "content": "Contenido",
+    "pasteText": "Pegue su texto, correo electrónico o nota aquí...",
+    "aiExtractInfo": "La IA extraerá automáticamente información importante",
+    "pleaseEnterText": "Por favor, ingrese algún texto",
+    "pleaseSelectFile": "Por favor, seleccione un archivo",
+    "failedToCreateDump": "Error al crear captura",
+    "failedToUploadFile": "Error al subir archivo",
+    "userNotAuthenticated": "Usuario no autenticado"
+  },
+  "myFeedback": {
+    "loading": "Cargando sus comentarios...",
+    "noFeedbackYet": "Aún no hay comentarios",
+    "noFeedbackMessage": "No has enviado ningún comentario. ¡Comparte tus pensamientos para ayudarnos a mejorar!"
+  },
+  "trackingPage": {
+    "title": "Recordatorios y Seguimiento",
+    "subtitle": "Administre sus recordatorios activos y elementos rastreables",
+    "loading": "Cargando recordatorios y seguimiento...",
+    "noItems": "No hay recordatorios ni elementos de seguimiento",
+    "noItemsMessage": "Sus recordatorios activos y elementos rastreables aparecerán aquí.",
+    "reminders": "Recordatorios",
+    "trackableItems": "Elementos Rastreables",
+    "noActiveReminders": "No hay recordatorios activos",
+    "noActiveTracking": "No hay elementos rastreables activos"
+  },
+  "feedbackPage": {
+    "title": "Comentarios",
+    "subtitle": "Ayúdanos a mejorar compartiendo tus opiniones, reportando errores o sugiriendo nuevas funciones."
+  },
+  "dashboardTitle": {
+    "dailyActionItems": "Elementos de Acción Diarios",
+    "itemsToReview": "{{count}} elemento para revisar",
+    "itemsToReview_other": "{{count}} elementos para revisar",
+    "hideActions": "Ocultar Acciones",
+    "showActions": "Mostrar Acciones"
+  },
+  "feedbackForm": {
+    "title": "Comparte Tu Opinión",
+    "category": "Categoría",
+    "selectCategory": "Selecciona una categoría...",
+    "bugReport": "Reporte de Error",
+    "featureRequest": "Solicitud de Función",
+    "generalFeedback": "Comentarios Generales",
+    "rating": "Calificación",
+    "message": "Mensaje",
+    "charactersCount": "{{count}} caracteres (mínimo 10 requeridos)",
+    "star": "estrella",
+    "stars": "estrellas",
+    "submitFeedback": "Enviar Comentarios",
+    "pleaseSelectCategory": "Por favor, seleccione una categoría de comentarios",
+    "messageTooShort": "El mensaje debe tener al menos 10 caracteres",
+    "pleaseProvideRating": "Por favor, proporcione una calificación entre 1 y 5 estrellas"
+  }
+}
