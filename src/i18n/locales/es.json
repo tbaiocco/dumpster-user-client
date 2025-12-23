@@ -269,6 +269,19 @@
     "pleaseProvideRating": "Por favor, proporcione una calificación entre 1 y 5 estrellas",
     "severity": "Severidad",
     "feature": "Funcionalidad",
-    "anonymousNotice": "Todos los comentarios son anónimos — no se rastrean datos personales."
+    "anonymousNotice": "Todos los comentarios son anónimos — no se rastrean datos personales.",
+    "aiError": "Error de IA",
+    "categorizationError": "Error de Categorización",
+    "summaryError": "Error de Resumen",
+    "entityError": "Error de Entidad",
+    "urgencyError": "Error de Detección de Urgencia",
+    "contentQuality": "Calidad de Contenido",
+    "performanceIssue": "Problema de Rendimiento",
+    "priority": {
+      "critical": "Crítico",
+      "high": "Alto",
+      "medium": "Medio",
+      "low": "Bajo"
+    }
   }
 }

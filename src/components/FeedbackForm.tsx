@@ -153,6 +153,13 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSuccess }) => {
               <option value="">{t('feedbackForm.selectCategory')}</option>
               <option value={FeedbackType.BUG_REPORT}>{t('feedbackForm.bugReport')}</option>
               <option value={FeedbackType.FEATURE_REQUEST}>{t('feedbackForm.featureRequest')}</option>
+              <option value={FeedbackType.AI_ERROR}>{t('feedbackForm.aiError')}</option>
+              <option value={FeedbackType.CATEGORIZATION_ERROR}>{t('feedbackForm.categorizationError')}</option>
+              <option value={FeedbackType.SUMMARY_ERROR}>{t('feedbackForm.summaryError')}</option>
+              <option value={FeedbackType.ENTITY_ERROR}>{t('feedbackForm.entityError')}</option>
+              <option value={FeedbackType.URGENCY_ERROR}>{t('feedbackForm.urgencyError')}</option>
+              <option value={FeedbackType.CONTENT_QUALITY}>{t('feedbackForm.contentQuality')}</option>
+              <option value={FeedbackType.PERFORMANCE_ISSUE}>{t('feedbackForm.performanceIssue')}</option>
               <option value={FeedbackType.GENERAL_FEEDBACK}>{t('feedbackForm.generalFeedback')}</option>
             </select>
           </div>

@@ -269,6 +269,19 @@
     "pleaseProvideRating": "Por favor, forneça uma avaliação entre 1 e 5 estrelas",
     "severity": "Gravidade",
     "feature": "Funcionalidade",
-    "anonymousNotice": "Todos os feedbacks são anônimos — nenhum dado pessoal é rastreado."
+    "anonymousNotice": "Todos os feedbacks são anônimos — nenhum dado pessoal é rastreado.",
+    "aiError": "Erro de IA",
+    "categorizationError": "Erro de Categorização",
+    "summaryError": "Erro de Resumo",
+    "entityError": "Erro de Entidade",
+    "urgencyError": "Erro na Detecção de Urgência",
+    "contentQuality": "Qualidade do Conteúdo",
+    "performanceIssue": "Problema de Desempenho",
+    "priority": {
+      "critical": "Crítico",
+      "high": "Alto",
+      "medium": "Médio",
+      "low": "Baixo"
+    }
   }
 }
