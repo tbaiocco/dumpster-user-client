@@ -7,7 +7,6 @@ import {
   LuPackageCheck,
   LuBadgeCheck,
   LuMessageSquareText,
-  LuLockKeyhole,
   LuChevronDown,
   LuUser,
   LuLogOut
@@ -42,12 +41,15 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
   ];
 
   const [userMenuOpen, setUserMenuOpen] = React.useState(false);
-  const userMenuRef = React.useRef<HTMLDivElement | null>(null);
+  const buttonRef = React.useRef<HTMLButtonElement | null>(null);
+  const menuRef = React.useRef<HTMLDivElement | null>(null);
 
   React.useEffect(() => {
     function onDocClick(e: MouseEvent) {
-      if (!userMenuRef.current) return;
-      if (!userMenuRef.current.contains(e.target as Node)) {
+      const target = e.target as Node;
+      const clickedInsideMenu = menuRef.current?.contains(target);
+      const clickedOnButton = buttonRef.current?.contains(target);
+      if (!clickedInsideMenu && !clickedOnButton) {
         setUserMenuOpen(false);
       }
     }
@@ -93,27 +95,69 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
             </nav>
 
             {/* User Menu (dropdown) */}
-            <div className="flex items-center gap-3 relative" ref={userMenuRef}>
+            <div className="flex items-center gap-3 relative">
               <button
+                ref={buttonRef}
                 title={t('nav.userMenu') || 'User Menu'}
                 aria-label={t('nav.userMenu') || 'User Menu'}
-                onClick={() => setUserMenuOpen((s) => !s)}
-                onMouseOver={() => { /* hint via title */ }}
+                aria-expanded={userMenuOpen}
+                aria-haspopup="menu"
+                onClick={() => {
+                  setUserMenuOpen((s) => !s);
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setUserMenuOpen((s) => !s);
+                    return;
+                  }
+                  if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    setUserMenuOpen(true);
+                    // focus will be moved in effect below
+                    return;
+                  }
+                }}
                 className="flex items-center gap-2 px-2 py-1 rounded text-slate-700 hover:bg-slate-100"
               >
-                <LuLockKeyhole className="h-5 w-5" />
+                <LuUser className="h-5 w-5" />
                 <span className="hidden sm:inline text-sm">{t('nav.userMenu') || 'User Menu'}</span>
                 <LuChevronDown className={`h-4 w-4 transition-transform duration-150 ${userMenuOpen ? 'rotate-180' : 'rotate-0'}`} />
               </button>
 
               {userMenuOpen && (
-                <div className="absolute right-0 top-full mt-2 w-56 bg-white border border-slate-200 rounded-md shadow-lg z-50">
+                <div
+                  role="menu"
+                  aria-label={t('nav.userMenu') || 'User Menu'}
+                  ref={menuRef}
+                  className="absolute right-0 top-full mt-2 w-56 bg-white border border-slate-200 rounded-md shadow-lg z-50 transform transition ease-out duration-150 opacity-100 translate-y-0 origin-top-right"
+                  onKeyDown={(e) => {
+                    if (e.key === 'Escape') {
+                      setUserMenuOpen(false);
+                      // return focus to button
+                      (buttonRef.current as HTMLElement | null)?.focus();
+                    }
+                    if (e.key === 'ArrowDown') {
+                      e.preventDefault();
+                      const first = document.querySelector('#user-menu-profile') as HTMLElement | null;
+                      first?.focus();
+                    }
+                    if (e.key === 'ArrowUp') {
+                      e.preventDefault();
+                      const last = document.querySelector('#user-menu-logout') as HTMLElement | null;
+                      last?.focus();
+                    }
+                  }}
+                >
                   <div className="px-4 py-3 border-b border-slate-100">
                     <div className="text-sm font-medium text-slate-700 truncate">{user?.phoneNumber}</div>
                   </div>
                   <div className="flex flex-col py-2">
                     <Link
+                      id="user-menu-profile"
                       to="/profile"
+                      role="menuitem"
+                      tabIndex={0}
                       className="px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2"
                       onClick={() => setUserMenuOpen(false)}
                     >
@@ -121,6 +165,9 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
                       {t('nav.profile')}
                     </Link>
                     <button
+                      id="user-menu-logout"
+                      role="menuitem"
+                      tabIndex={0}
                       className="mt-2 px-4 py-2 text-left text-sm text-red-600 hover:bg-slate-50 flex items-center gap-2"
                       onClick={() => {
                         setUserMenuOpen(false);
