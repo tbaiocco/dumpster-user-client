@@ -2,15 +2,14 @@ import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { 
-  LuLayoutDashboard, 
-  LuFileScan, 
-  LuPackageCheck, 
-  LuBadgeCheck, 
-  LuMessageSquareText, 
-  LuLockKeyhole 
+  LuLayoutDashboard,
+  LuFileScan,
+  LuPackageCheck,
+  LuBadgeCheck,
+  LuMessageSquareText,
+  LuLockKeyhole
 } from 'react-icons/lu';
 import { useAuth } from '../hooks/useAuth';
-import { Button } from './ui/Button';
 
 export interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -37,8 +36,21 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
     { path: '/tracking', label: t('nav.tracking'), icon: LuPackageCheck },
     { path: '/review', label: t('nav.review'), icon: LuBadgeCheck },
     { path: '/feedback', label: t('nav.feedback'), icon: LuMessageSquareText },
-    { path: '/profile', label: t('nav.profile'), icon: LuLockKeyhole },
   ];
+
+  const [userMenuOpen, setUserMenuOpen] = React.useState(false);
+  const userMenuRef = React.useRef<HTMLDivElement | null>(null);
+
+  React.useEffect(() => {
+    function onDocClick(e: MouseEvent) {
+      if (!userMenuRef.current) return;
+      if (!userMenuRef.current.contains(e.target as Node)) {
+        setUserMenuOpen(false);
+      }
+    }
+    document.addEventListener('click', onDocClick);
+    return () => document.removeEventListener('click', onDocClick);
+  }, []);
 
   return (
     <div className="min-h-screen bg-stone flex flex-col">
@@ -77,18 +89,44 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
               })}
             </nav>
 
-            {/* User Menu */}
-            <div className="flex items-center gap-3">
-              <span className="hidden sm:block text-sm text-slate-600">
-                {user?.phoneNumber}
-              </span>
-              <Button
-                onClick={handleLogout}
-                variant="outline"
-                size="sm"
+            {/* User Menu (dropdown) */}
+            <div className="flex items-center gap-3 relative" ref={userMenuRef}>
+              <button
+                title={t('nav.userMenu') || 'User Menu'}
+                aria-label={t('nav.userMenu') || 'User Menu'}
+                onClick={() => setUserMenuOpen((s) => !s)}
+                onMouseOver={() => { /* hint via title */ }}
+                className="flex items-center gap-2 px-2 py-1 rounded text-slate-700 hover:bg-slate-100"
               >
-                {t('nav.logout')}
-              </Button>
+                <LuLockKeyhole className="h-5 w-5" />
+                <span className="hidden sm:inline text-sm">{t('nav.userMenu') || 'User Menu'}</span>
+              </button>
+
+              {userMenuOpen && (
+                <div className="absolute right-0 top-full mt-2 w-56 bg-white border border-slate-200 rounded-md shadow-lg z-50">
+                  <div className="px-4 py-3 border-b border-slate-100">
+                    <div className="text-sm font-medium text-slate-700 truncate">{user?.phoneNumber}</div>
+                  </div>
+                  <div className="flex flex-col py-2">
+                    <Link
+                      to="/profile"
+                      className="px-4 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                      onClick={() => setUserMenuOpen(false)}
+                    >
+                      {t('nav.profile')}
+                    </Link>
+                    <button
+                      className="mt-2 px-4 py-2 text-left text-sm text-red-600 hover:bg-slate-50"
+                      onClick={() => {
+                        setUserMenuOpen(false);
+                        handleLogout();
+                      }}
+                    >
+                      {t('nav.logout')}
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
