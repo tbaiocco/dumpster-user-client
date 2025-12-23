@@ -12,7 +12,7 @@ import { Badge } from './ui/Badge';
 import { LoadingSpinner } from './LoadingSpinner';
 import { EmptyState } from './EmptyState';
 import * as feedbackService from '../services/feedback.service';
-import { useAuth } from '../hooks/useAuth';
+
 import { formatDisplayDate } from '../utils/formatting';
 
 export interface MyFeedbackListProps {
@@ -24,13 +24,13 @@ export interface MyFeedbackListProps {
  */
 export const MyFeedbackList: React.FC<MyFeedbackListProps> = ({ refreshTrigger = 0 }) => {
   const { t } = useTranslation();
-  const { user } = useAuth();
   const [feedback, setFeedback] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [limit, setLimit] = useState<number>(10);
   const [offset, setOffset] = useState<number>(0);
   const [total, setTotal] = useState<number>(0);
+  const [upvotingIds, setUpvotingIds] = useState<Set<string>>(new Set());
 
   // Fetch feedback list
   const fetchFeedback = useCallback(async () => {
@@ -245,8 +245,13 @@ export const MyFeedbackList: React.FC<MyFeedbackListProps> = ({ refreshTrigger =
                   <div className="flex items-center gap-2">
                     <button
                       onClick={async () => {
+                        // prevent duplicate clicks
+                        if (upvotingIds.has(item.id)) return;
+
                         // optimistic update
                         try {
+                          setUpvotingIds((prev) => new Set(prev).add(item.id));
+
                           const current = feedback.map((f) => ({ ...f }));
                           const idx = current.findIndex((f) => f.id === item.id);
                           if (idx !== -1) {
@@ -258,11 +263,18 @@ export const MyFeedbackList: React.FC<MyFeedbackListProps> = ({ refreshTrigger =
                         } catch (err) {
                           // revert on error by refetching
                           fetchFeedback();
+                        } finally {
+                          setUpvotingIds((prev) => {
+                            const next = new Set(prev);
+                            next.delete(item.id);
+                            return next;
+                          });
                         }
                       }}
                       aria-label={"Upvote feedback"}
                       title={"Upvote"}
-                      className="px-3 py-1 text-sm bg-slate-100 hover:bg-slate-200 rounded flex items-center gap-2"
+                      disabled={upvotingIds.has(item.id)}
+                      className="px-3 py-1 text-sm bg-slate-100 hover:bg-slate-200 rounded flex items-center gap-2 disabled:opacity-60"
                     >
                       <ThumbsUp className="h-4 w-4 text-slate-700" />
                       <span className="text-sm">Upvote</span>
@@ -276,7 +288,18 @@ export const MyFeedbackList: React.FC<MyFeedbackListProps> = ({ refreshTrigger =
       </CardContent>
       <div className="px-4 py-3 border-t border-slate-100 flex items-center justify-between">
         <div className="text-sm text-slate-600">Showing {Math.min(offset + 1, total || 0)} - {Math.min(offset + feedback.length, total || offset + feedback.length)} of {total}</div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
+          <label className="text-sm text-slate-600">Per page:</label>
+          <select
+            value={limit}
+            onChange={(e) => { setLimit(Number(e.target.value)); setOffset(0); }}
+            className="px-2 py-1 border rounded text-sm"
+          >
+            <option value={10}>10</option>
+            <option value={25}>25</option>
+            <option value={50}>50</option>
+          </select>
+
           <button
             onClick={() => setOffset(Math.max(0, offset - limit))}
             disabled={offset === 0}
