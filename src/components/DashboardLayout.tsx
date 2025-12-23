@@ -7,7 +7,10 @@ import {
   LuPackageCheck,
   LuBadgeCheck,
   LuMessageSquareText,
-  LuLockKeyhole
+  LuLockKeyhole,
+  LuChevronDown,
+  LuUser,
+  LuLogOut
 } from 'react-icons/lu';
 import { useAuth } from '../hooks/useAuth';
 
@@ -100,6 +103,7 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
               >
                 <LuLockKeyhole className="h-5 w-5" />
                 <span className="hidden sm:inline text-sm">{t('nav.userMenu') || 'User Menu'}</span>
+                <LuChevronDown className={`h-4 w-4 transition-transform duration-150 ${userMenuOpen ? 'rotate-180' : 'rotate-0'}`} />
               </button>
 
               {userMenuOpen && (
@@ -110,18 +114,20 @@ export const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) =>
                   <div className="flex flex-col py-2">
                     <Link
                       to="/profile"
-                      className="px-4 py-2 text-sm text-slate-700 hover:bg-slate-50"
+                      className="px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2"
                       onClick={() => setUserMenuOpen(false)}
                     >
+                      <LuUser className="h-4 w-4 text-slate-500" />
                       {t('nav.profile')}
                     </Link>
                     <button
-                      className="mt-2 px-4 py-2 text-left text-sm text-red-600 hover:bg-slate-50"
+                      className="mt-2 px-4 py-2 text-left text-sm text-red-600 hover:bg-slate-50 flex items-center gap-2"
                       onClick={() => {
                         setUserMenuOpen(false);
                         handleLogout();
                       }}
                     >
+                      <LuLogOut className="h-4 w-4 text-red-500" />
                       {t('nav.logout')}
                     </button>
                   </div>

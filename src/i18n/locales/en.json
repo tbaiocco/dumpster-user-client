@@ -38,7 +38,8 @@
     "review": "Review",
     "feedback": "Feedback",
     "profile": "Profile",
-    "logout": "Log Out"
+    "logout": "Log Out",
+    "userMenu": "Account"
   },
   "capture": {
     "title": "Capture",

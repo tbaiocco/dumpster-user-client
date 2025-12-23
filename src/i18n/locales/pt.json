@@ -38,7 +38,8 @@
     "review": "Revisar",
     "feedback": "Feedback",
     "profile": "Perfil",
-    "logout": "Sair"
+    "logout": "Sair",
+    "userMenu": "Conta"
   },
   "capture": {
     "title": "Captura",

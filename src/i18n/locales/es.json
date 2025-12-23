@@ -38,7 +38,8 @@
     "review": "Revisar",
     "feedback": "Comentarios",
     "profile": "Perfil",
-    "logout": "Cerrar Sesión"
+    "logout": "Cerrar Sesión",
+    "userMenu": "Cuenta"
   },
   "capture": {
     "title": "Captura",
