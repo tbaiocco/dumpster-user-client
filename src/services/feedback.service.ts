@@ -14,13 +14,10 @@ import type { Feedback } from '../types/feedback.types';
  * @returns Promise with submitted feedback
  */
 export async function submitFeedback(
-  feedback: {
-    category: string;
-    message: string;
-    rating?: number;
-  }
+  feedback: any
 ): Promise<ApiResponse<Feedback>> {
-  return apiService.post('/api/feedback', feedback);
+  // New backend endpoint expects payload at /feedback/submit
+  return apiService.post('/feedback/submit', feedback);
 }
 
 /**

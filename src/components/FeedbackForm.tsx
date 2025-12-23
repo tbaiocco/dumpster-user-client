@@ -23,13 +23,16 @@ export interface FeedbackFormProps {
  * FeedbackForm Component
  */
 export const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSuccess }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { user } = useAuth();
   const { addToast } = useToast();
   
   const [category, setCategory] = useState('');
+  const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
   const [rating, setRating] = useState<number>(0);
+  const [severity, setSeverity] = useState('medium');
+  const [feature, setFeature] = useState('search');
   const [hoveredRating, setHoveredRating] = useState<number>(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [validationError, setValidationError] = useState<string | null>(null);
@@ -38,6 +41,10 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSuccess }) => {
   const validateForm = (): boolean => {
     if (!category) {
       setValidationError(t('feedbackForm.pleaseSelectCategory'));
+      return false;
+    }
+    if (!title.trim()) {
+      setValidationError(t('feedbackForm.title') + ' is required');
       return false;
     }
     if (message.trim().length < 10) {
@@ -66,19 +73,36 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSuccess }) => {
     setValidationError(null);
 
     try {
-      const response = await feedbackService.submitFeedback({
-        category,
-        message: message.trim(),
+      // Build payload according to new API contract
+      const payload = {
+        type: category === 'feature_request' ? 'feature' : category, // map feature_request -> feature
+        severity,
+        title: title.trim(),
         rating,
-      });
+        description: message.trim(),
+        context: {
+          platform: 'webapp',
+          feature,
+          timestamp: new Date().toISOString(),
+        },
+        metadata: {
+          userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : 'unknown',
+          language: i18n?.language || (typeof navigator !== 'undefined' ? navigator.language : 'en'),
+        },
+      };
+
+      const response = await feedbackService.submitFeedback(payload);
 
       if (response.success) {
         addToast('success', t('feedback.submitted'));
-        
+
         // Clear form
         setCategory('');
+        setTitle('');
         setMessage('');
         setRating(0);
+        setSeverity('medium');
+        setFeature('search');
         setValidationError(null);
 
         // Notify parent to refresh list
@@ -129,6 +153,63 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSuccess }) => {
               <option value="feature_request">{t('feedbackForm.featureRequest')}</option>
               <option value="general">{t('feedbackForm.generalFeedback')}</option>
             </select>
+          </div>
+
+          {/* Title */}
+          <div>
+            <label htmlFor="title" className="block text-sm font-medium text-slate-700 mb-2">
+              {t('feedbackForm.title')} *
+            </label>
+            <input
+              id="title"
+              type="text"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
+              className="w-full px-4 py-2 border rounded-charming text-sm focus:outline-none focus:ring-2 focus:ring-electric-purple"
+              placeholder={t('feedbackForm.title')}
+              disabled={isSubmitting}
+            />
+          </div>
+
+          {/* Severity + Feature */}
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label htmlFor="severity" className="block text-sm font-medium text-slate-700 mb-2">
+                {t('feedbackForm.severity')}
+              </label>
+              <select
+                id="severity"
+                value={severity}
+                onChange={(e) => setSeverity(e.target.value)}
+                className="w-full px-4 py-2 border rounded-charming text-sm focus:outline-none focus:ring-2 focus:ring-electric-purple"
+                disabled={isSubmitting}
+              >
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+            <div>
+              <label htmlFor="feature" className="block text-sm font-medium text-slate-700 mb-2">
+                {t('feedbackForm.feature')}
+              </label>
+              <select
+                id="feature"
+                value={feature}
+                onChange={(e) => setFeature(e.target.value)}
+                className="w-full px-4 py-2 border rounded-charming text-sm focus:outline-none focus:ring-2 focus:ring-electric-purple"
+                disabled={isSubmitting}
+              >
+                <option value="dashboard">Dashboard</option>
+                <option value="search">Search</option>
+                <option value="tracking">Tracking</option>
+                <option value="reminder">Reminder</option>
+                <option value="review">Review</option>
+                <option value="feedback">Feedback</option>
+                <option value="account">Account</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
           </div>
 
           {/* Rating Stars */}
