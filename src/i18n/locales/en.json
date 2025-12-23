@@ -266,6 +266,9 @@
     "submitFeedback": "Submit Feedback",
     "pleaseSelectCategory": "Please select a feedback category",
     "messageTooShort": "Message must be at least 10 characters",
-    "pleaseProvideRating": "Please provide a rating between 1 and 5 stars"
+    "pleaseProvideRating": "Please provide a rating between 1 and 5 stars",
+    "severity": "Severity",
+    "feature": "Feature",
+    "anonymousNotice": "All feedback is anonymous — no personal data is tracked."
   }
 }

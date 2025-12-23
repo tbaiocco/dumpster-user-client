@@ -128,6 +128,7 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSuccess }) => {
     <Card>
       <CardHeader>
         <CardTitle>{t('feedbackForm.title')}</CardTitle>
+        <p className="mt-1 text-sm text-amber-600">{t('feedbackForm.anonymousNotice')}</p>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">

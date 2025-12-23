@@ -266,6 +266,9 @@
     "submitFeedback": "Enviar Feedback",
     "pleaseSelectCategory": "Por favor, selecione uma categoria de feedback",
     "messageTooShort": "A mensagem deve ter pelo menos 10 caracteres",
-    "pleaseProvideRating": "Por favor, forneça uma avaliação entre 1 e 5 estrelas"
+    "pleaseProvideRating": "Por favor, forneça uma avaliação entre 1 e 5 estrelas",
+    "severity": "Gravidade",
+    "feature": "Funcionalidade",
+    "anonymousNotice": "Todos os feedbacks são anônimos — nenhum dado pessoal é rastreado."
   }
 }

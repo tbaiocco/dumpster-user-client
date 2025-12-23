@@ -266,6 +266,9 @@
     "submitFeedback": "Enviar Comentarios",
     "pleaseSelectCategory": "Por favor, seleccione una categoría de comentarios",
     "messageTooShort": "El mensaje debe tener al menos 10 caracteres",
-    "pleaseProvideRating": "Por favor, proporcione una calificación entre 1 y 5 estrellas"
+    "pleaseProvideRating": "Por favor, proporcione una calificación entre 1 y 5 estrellas",
+    "severity": "Severidad",
+    "feature": "Funcionalidad",
+    "anonymousNotice": "Todos los comentarios son anónimos — no se rastrean datos personales."
   }
 }
