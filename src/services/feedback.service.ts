@@ -5,7 +5,7 @@
  */
 
 import { apiService, type ApiResponse } from './api';
-import type { Feedback } from '../types/feedback.types';
+import type { FeedbackPayload } from '../types/feedback';
 
 /**
  * Submit feedback
@@ -14,8 +14,8 @@ import type { Feedback } from '../types/feedback.types';
  * @returns Promise with submitted feedback
  */
 export async function submitFeedback(
-  feedback: any
-): Promise<ApiResponse<Feedback>> {
+  feedback: FeedbackPayload
+): Promise<ApiResponse<any>> {
   // New backend endpoint expects payload at /feedback/submit
   return apiService.post('/feedback/submit', feedback);
 }
@@ -28,6 +28,6 @@ export async function submitFeedback(
  */
 export async function fetchMyFeedback(
   userId: string
-): Promise<ApiResponse<{ feedback: Feedback[]; total: number }>> {
+): Promise<ApiResponse<any>> {
   return apiService.get(`/feedback/user/${userId}`);
 }

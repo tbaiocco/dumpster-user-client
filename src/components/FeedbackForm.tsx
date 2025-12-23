@@ -12,6 +12,7 @@ import { TextArea } from './ui/TextArea';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/Card';
 import { cn } from '../lib/utils';
 import * as feedbackService from '../services/feedback.service';
+import { FeedbackType, FeedbackPriority } from '../types/feedback';
 import { useToast } from './Toast';
 import { useAuth } from '../hooks/useAuth';
 
@@ -27,12 +28,12 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSuccess }) => {
   const { user } = useAuth();
   const { addToast } = useToast();
   
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState<string>('');
   const [title, setTitle] = useState('');
   const [message, setMessage] = useState('');
   const [rating, setRating] = useState<number>(0);
-  const [severity, setSeverity] = useState('medium');
-  const [feature, setFeature] = useState('search');
+  const [severity, setSeverity] = useState<string>(FeedbackPriority.MEDIUM);
+  const [feature, setFeature] = useState<string>('search');
   const [hoveredRating, setHoveredRating] = useState<number>(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [validationError, setValidationError] = useState<string | null>(null);
@@ -75,8 +76,8 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSuccess }) => {
     try {
       // Build payload according to new API contract
       const payload = {
-        type: category === 'feature_request' ? 'feature' : category, // map feature_request -> feature
-        severity,
+        type: category || FeedbackType.GENERAL_FEEDBACK,
+        severity: severity || FeedbackPriority.MEDIUM,
         title: title.trim(),
         rating,
         description: message.trim(),
@@ -150,9 +151,9 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSuccess }) => {
               disabled={isSubmitting}
             >
               <option value="">{t('feedbackForm.selectCategory')}</option>
-              <option value="bug">{t('feedbackForm.bugReport')}</option>
-              <option value="feature_request">{t('feedbackForm.featureRequest')}</option>
-              <option value="general">{t('feedbackForm.generalFeedback')}</option>
+              <option value={FeedbackType.BUG_REPORT}>{t('feedbackForm.bugReport')}</option>
+              <option value={FeedbackType.FEATURE_REQUEST}>{t('feedbackForm.featureRequest')}</option>
+              <option value={FeedbackType.GENERAL_FEEDBACK}>{t('feedbackForm.generalFeedback')}</option>
             </select>
           </div>
 
@@ -185,9 +186,10 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSuccess }) => {
                 className="w-full px-4 py-2 border rounded-charming text-sm focus:outline-none focus:ring-2 focus:ring-electric-purple"
                 disabled={isSubmitting}
               >
-                <option value="high">High</option>
-                <option value="medium">Medium</option>
-                <option value="low">Low</option>
+                <option value={FeedbackPriority.CRITICAL}>{t('feedbackForm.priority.critical', 'Critical')}</option>
+                <option value={FeedbackPriority.HIGH}>{t('feedbackForm.priority.high', 'High')}</option>
+                <option value={FeedbackPriority.MEDIUM}>{t('feedbackForm.priority.medium', 'Medium')}</option>
+                <option value={FeedbackPriority.LOW}>{t('feedbackForm.priority.low', 'Low')}</option>
               </select>
             </div>
             <div>
