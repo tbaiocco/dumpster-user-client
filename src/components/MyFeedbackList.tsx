@@ -4,14 +4,13 @@
  * Displays user's submitted feedback with color-coded status badges
  */
 
-import React, { useEffect, useState } from 'react';
-import { Clock, Eye, CheckCircle, XCircle } from 'lucide-react';
+import React, { useEffect, useState, useCallback } from 'react';
+import { Clock, Eye, CheckCircle, XCircle, ThumbsUp } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Card, CardHeader, CardTitle, CardContent } from './ui/Card';
 import { Badge } from './ui/Badge';
 import { LoadingSpinner } from './LoadingSpinner';
 import { EmptyState } from './EmptyState';
-import type { Feedback } from '../types/feedback.types';
 import * as feedbackService from '../services/feedback.service';
 import { useAuth } from '../hooks/useAuth';
 import { formatDisplayDate } from '../utils/formatting';
@@ -26,22 +25,27 @@ export interface MyFeedbackListProps {
 export const MyFeedbackList: React.FC<MyFeedbackListProps> = ({ refreshTrigger = 0 }) => {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const [feedback, setFeedback] = useState<Feedback[]>([]);
+  const [feedback, setFeedback] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [limit, setLimit] = useState<number>(10);
+  const [offset, setOffset] = useState<number>(0);
+  const [total, setTotal] = useState<number>(0);
 
   // Fetch feedback list
-  const fetchFeedback = async () => {
-    if (!user?.id) return;
-
+  const fetchFeedback = useCallback(async () => {
     setLoading(true);
     setError(null);
 
     try {
-      const response = await feedbackService.fetchMyFeedback(user.id);
+      const response = await feedbackService.fetchMyFeedback({ limit, offset });
 
       if (response.success && response.data) {
-        setFeedback(response.data.feedback);
+        // Ensure newest-first ordering by createdAt
+        const items = Array.isArray(response.data.items) ? response.data.items : [];
+        items.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        setFeedback(items);
+        setTotal(typeof response.data.total === 'number' ? response.data.total : items.length);
       } else {
         setError(response.error?.message || 'Failed to load feedback');
       }
@@ -50,30 +54,34 @@ export const MyFeedbackList: React.FC<MyFeedbackListProps> = ({ refreshTrigger =
     } finally {
       setLoading(false);
     }
-  };
+  }, [limit, offset]);
 
   // Fetch on mount and when refreshTrigger changes
   useEffect(() => {
     fetchFeedback();
-  }, [user?.id, refreshTrigger]);
+  }, [fetchFeedback, refreshTrigger]);
 
   // Status badge configuration
   const getStatusBadge = (status: string) => {
-    switch (status.toLowerCase()) {
+    const s = (status || '').toLowerCase();
+    switch (s) {
       case 'pending':
+      case 'acknowledged':
         return {
           icon: <Clock className="h-3.5 w-3.5" />,
           label: 'Pending',
           className: 'bg-yellow-100 text-yellow-700 border-yellow-300',
         };
-      case 'in_review':
-      case 'in review':
+      case 'in_progress':
+      case 'in-progress':
+      case 'in progress':
         return {
           icon: <Eye className="h-3.5 w-3.5" />,
-          label: 'In Review',
+          label: 'In Progress',
           className: 'bg-blue-100 text-blue-700 border-blue-300',
         };
       case 'resolved':
+      case 'closed':
         return {
           icon: <CheckCircle className="h-3.5 w-3.5" />,
           label: 'Resolved',
@@ -88,7 +96,7 @@ export const MyFeedbackList: React.FC<MyFeedbackListProps> = ({ refreshTrigger =
       default:
         return {
           icon: <Clock className="h-3.5 w-3.5" />,
-          label: status,
+          label: status || 'Unknown',
           className: 'bg-slate-100 text-slate-700 border-slate-300',
         };
     }
@@ -99,12 +107,14 @@ export const MyFeedbackList: React.FC<MyFeedbackListProps> = ({ refreshTrigger =
     switch (category) {
       case 'bug':
         return 'Bug Report';
+      case 'feature':
       case 'feature_request':
         return 'Feature Request';
+      case 'improvement':
       case 'general':
         return 'General Feedback';
       default:
-        return category;
+        return category || 'Feedback';
     }
   };
 
@@ -185,8 +195,9 @@ export const MyFeedbackList: React.FC<MyFeedbackListProps> = ({ refreshTrigger =
       <CardContent>
         <div className="space-y-4">
           {feedback.map((item) => {
-            const statusBadge = getStatusBadge(item.status);
-            
+            const statusBadge = getStatusBadge(item.status || item.statusName || '');
+            const typeLabel = getCategoryLabel(item.type || item.category || '');
+
             return (
               <div
                 key={item.id}
@@ -194,46 +205,94 @@ export const MyFeedbackList: React.FC<MyFeedbackListProps> = ({ refreshTrigger =
               >
                 {/* Header */}
                 <div className="flex items-start justify-between mb-2">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <span className="text-sm font-medium text-slate-700">
-                      {getCategoryLabel(item.category)}
-                    </span>
+                  <div className="flex items-center gap-3 flex-wrap">
+                    <div>
+                      <div className="text-sm font-semibold text-slate-800">{item.title || item.message?.slice(0, 60) || 'Untitled'}</div>
+                      <div className="text-xs text-slate-500">{typeLabel} • {item.priority || 'medium'}</div>
+                    </div>
+
                     <Badge variant="pending" className={statusBadge.className}>
                       {statusBadge.icon}
-                      <span className="ml-1">{statusBadge.label}</span>
+                      <span className="ml-1 text-xs">{statusBadge.label}</span>
                     </Badge>
                   </div>
-                  <span className="text-xs text-slate-500">
-                    {formatDisplayDate(new Date(item.createdAt))}
-                  </span>
+                  <div className="text-right">
+                    <div className="text-xs text-slate-500">{formatDisplayDate(new Date(item.createdAt))}</div>
+                    <div className="text-xs text-slate-500">{item.tags ? (Array.isArray(item.tags) ? item.tags.join(', ') : item.tags) : ''}</div>
+                  </div>
                 </div>
 
-                {/* Message */}
-                <p className="text-sm text-slate-700 mb-2 leading-relaxed">
-                  {item.message}
+                {/* Description */}
+                <p className="text-sm text-slate-700 mb-3 leading-relaxed">
+                  {item.description || item.message || ''}
                 </p>
 
-                {/* Rating */}
-                {item.rating && (
-                  <div className="flex items-center gap-1">
-                    {[...Array(5)].map((_, index) => (
-                      <span
-                        key={index}
-                        className={index < item.rating! ? 'text-yellow-400' : 'text-slate-300'}
-                      >
-                        ★
-                      </span>
-                    ))}
-                    <span className="text-xs text-slate-500 ml-2">
-                      {item.rating} star{item.rating !== 1 ? 's' : ''}
-                    </span>
+                {/* Footer: rating / upvotes / actions */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    {item.rating ? (
+                      <div className="flex items-center gap-1 text-yellow-400">
+                        {[...Array(5)].map((_, index) => (
+                          <span key={index} className={index < item.rating ? 'text-yellow-400' : 'text-slate-300'}>★</span>
+                        ))}
+                        <span className="text-xs text-slate-500 ml-2">{item.rating} star{item.rating !== 1 ? 's' : ''}</span>
+                      </div>
+                    ) : null}
+
+                    <div className="text-sm text-slate-600">Upvotes: <span className="font-medium">{item.upvotes ?? 0}</span></div>
                   </div>
-                )}
+
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={async () => {
+                        // optimistic update
+                        try {
+                          const current = feedback.map((f) => ({ ...f }));
+                          const idx = current.findIndex((f) => f.id === item.id);
+                          if (idx !== -1) {
+                            current[idx].upvotes = (current[idx].upvotes ?? 0) + 1;
+                            setFeedback(current);
+                          }
+
+                          await feedbackService.upvoteFeedback(item.id);
+                        } catch (err) {
+                          // revert on error by refetching
+                          fetchFeedback();
+                        }
+                      }}
+                      aria-label={"Upvote feedback"}
+                      title={"Upvote"}
+                      className="px-3 py-1 text-sm bg-slate-100 hover:bg-slate-200 rounded flex items-center gap-2"
+                    >
+                      <ThumbsUp className="h-4 w-4 text-slate-700" />
+                      <span className="text-sm">Upvote</span>
+                    </button>
+                  </div>
+                </div>
               </div>
             );
           })}
         </div>
       </CardContent>
+      <div className="px-4 py-3 border-t border-slate-100 flex items-center justify-between">
+        <div className="text-sm text-slate-600">Showing {Math.min(offset + 1, total || 0)} - {Math.min(offset + feedback.length, total || offset + feedback.length)} of {total}</div>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setOffset(Math.max(0, offset - limit))}
+            disabled={offset === 0}
+            className="px-3 py-1 rounded bg-slate-100 hover:bg-slate-200 disabled:opacity-50 text-sm"
+          >
+            Previous
+          </button>
+          <button
+            onClick={() => setOffset(offset + limit)}
+            disabled={offset + limit >= total}
+            className="px-3 py-1 rounded bg-slate-100 hover:bg-slate-200 disabled:opacity-50 text-sm"
+          >
+            Next
+          </button>
+        </div>
+      </div>
     </Card>
   );
 };

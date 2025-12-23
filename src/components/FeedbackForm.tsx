@@ -92,7 +92,7 @@ export const FeedbackForm: React.FC<FeedbackFormProps> = ({ onSuccess }) => {
         },
       };
 
-      const response = await feedbackService.submitFeedback(payload);
+      const response = await feedbackService.submitFeedback(payload, user.id);
 
       if (response.success) {
         addToast('success', t('feedback.submitted'));
