@@ -28,7 +28,7 @@ export const LoginPage: React.FC = () => {
       
       if (success) {
         setCodeSent(true);
-        console.log('Verification code sent! Check the backend console for the code.');
+        console.log('Verification code sent! Check the backend console and SMS for the code.');
       }
     } finally {
       setLoading(false);
@@ -73,7 +73,7 @@ export const LoginPage: React.FC = () => {
             </CardTitle>
             <CardDescription>
               {codeSent
-                ? 'Check the backend console for your verification code'
+                ? 'Check your SMS for your verification code'
                 : 'Enter your phone number to receive a verification code'}
             </CardDescription>
           </CardHeader>
@@ -112,7 +112,6 @@ export const LoginPage: React.FC = () => {
                   <p className="text-sm text-green-800">
                     Verification code sent to <strong>{phoneNumber}</strong>
                     <br />
-                    <strong>Development Mode:</strong> Check the backend console for the code.
                   </p>
                 </div>
 
