@@ -28,6 +28,8 @@ export const ProfilePage: React.FC = () => {
   const [emailDigest, setEmailDigest] = useState(true);
   const [instantNotifications, setInstantNotifications] = useState(true);
   const [reminderAlerts, setReminderAlerts] = useState(true);
+  const [morningDigest, setMorningDigest] = useState(true);
+  const [eveningDigest, setEveningDigest] = useState(true);
 
   // Load profile on mount
   useEffect(() => {
@@ -48,6 +50,8 @@ export const ProfilePage: React.FC = () => {
       setEmailDigest(data.notification_preferences?.email_digest ?? true);
       setInstantNotifications(data.notification_preferences?.instant_notifications ?? true);
       setReminderAlerts(data.notification_preferences?.reminder_alerts ?? true);
+      setMorningDigest(data.notification_preferences?.morning_digest ?? true);
+      setEveningDigest(data.notification_preferences?.evening_digest ?? true);
     } catch (err: any) {
       console.error('Failed to load profile:', err);
       setError(err.message || t('profile.error'));
@@ -71,6 +75,8 @@ export const ProfilePage: React.FC = () => {
           email_digest: emailDigest,
           instant_notifications: instantNotifications,
           reminder_alerts: reminderAlerts,
+          morning_digest: morningDigest,
+          evening_digest: eveningDigest,
         },
       };
 
@@ -266,6 +272,30 @@ export const ProfilePage: React.FC = () => {
                 />
                 <span className="text-sm text-stone-700">
                   Reminder Alerts (notifications for upcoming reminders)
+                </span>
+              </label>
+
+              <label className="flex items-center space-x-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={morningDigest}
+                  onChange={(e) => setMorningDigest(e.target.checked)}
+                  className="w-5 h-5 rounded border-stone-300 text-purple-600 focus:ring-purple-500"
+                />
+                <span className="text-sm text-stone-700">
+                  Morning Digest (daily summary sent in the morning)
+                </span>
+              </label>
+
+              <label className="flex items-center space-x-3 cursor-pointer">
+                <input
+                  type="checkbox"
+                  checked={eveningDigest}
+                  onChange={(e) => setEveningDigest(e.target.checked)}
+                  className="w-5 h-5 rounded border-stone-300 text-purple-600 focus:ring-purple-500"
+                />
+                <span className="text-sm text-stone-700">
+                  Evening Digest (daily summary sent in the evening)
                 </span>
               </label>
             </div>

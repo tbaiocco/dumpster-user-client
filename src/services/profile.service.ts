@@ -19,6 +19,8 @@ export interface UserProfile {
     email_digest?: boolean;
     instant_notifications?: boolean;
     reminder_alerts?: boolean;
+    morning_digest?: boolean;
+    evening_digest?: boolean;
   };
   created_at?: string;
   updated_at?: string;
@@ -35,6 +37,8 @@ export interface ProfileUpdateRequest {
     email_digest?: boolean;
     instant_notifications?: boolean;
     reminder_alerts?: boolean;
+    morning_digest?: boolean;
+    evening_digest?: boolean;
   };
 }
 
