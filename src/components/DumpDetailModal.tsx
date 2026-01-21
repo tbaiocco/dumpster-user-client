@@ -146,7 +146,15 @@ export const DumpDetailModal: React.FC<DumpDetailModalProps> = ({
       // For other dumps, just update directly
       let result;
       if (dump.status === 'received') {
-        result = await acceptDumpWithOptimism(dump.id, updates);
+        // Use prop callback if provided, otherwise fall back to context method
+        if (onAccept) {
+          await onAccept(dump.id, updates);
+          addToast('success', t('capture.accepted'));
+          onClose();
+          return;
+        } else {
+          result = await acceptDumpWithOptimism(dump.id, updates);
+        }
       } else {
         // Direct update for already-approved dumps
         const updateResponse = await dumpsService.updateDump(dump.id, updates);
@@ -158,9 +166,6 @@ export const DumpDetailModal: React.FC<DumpDetailModalProps> = ({
 
       if (result.success) {
         addToast('success', dump.status === 'received' ? t('capture.accepted') : t('capture.saved'));
-        if (onAccept) {
-          onAccept(dump.id, updates);
-        }
         onClose();
       } else {
         // Keep modal open on failure, preserve edits
@@ -194,17 +199,21 @@ export const DumpDetailModal: React.FC<DumpDetailModalProps> = ({
     setValidationError(null);
 
     try {
-      const result = await rejectDumpWithOptimism(dump.id, rejectReason.trim());
-
-      if (result.success) {
+      // Use prop callback if provided, otherwise fall back to context method
+      if (onReject) {
+        await onReject(dump.id, rejectReason.trim());
         addToast('success', t('capture.rejected'));
-        if (onReject) {
-          onReject(dump.id, rejectReason.trim());
-        }
         onClose();
       } else {
-        // Keep modal open on failure, preserve edits
-        addToast('error', result.error || t('capture.failedToReject'));
+        const result = await rejectDumpWithOptimism(dump.id, rejectReason.trim());
+
+        if (result.success) {
+          addToast('success', t('capture.rejected'));
+          onClose();
+        } else {
+          // Keep modal open on failure, preserve edits
+          addToast('error', result.error || t('capture.failedToReject'));
+        }
       }
     } catch (err: any) {
       addToast('error', err?.message || t('feedback.error'));

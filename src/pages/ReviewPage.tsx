@@ -17,8 +17,8 @@ import { Button } from '../components/ui/Button';
 import { enrichDump } from '../utils/time-buckets';
 import type { DumpDerived } from '../types/dump.types';
 import type { SearchResult } from '../types/search.types';
-import { useDumps } from '../hooks/useDumps';
 import { useToast } from '../components/Toast';
+import { useAuth } from '../hooks/useAuth';
 
 interface FlaggedDump {
   id: string;
@@ -42,6 +42,7 @@ interface FlaggedDump {
  */
 export const ReviewPage: React.FC = () => {
   const { t } = useTranslation();
+  const { user } = useAuth();
   const [flaggedDumps, setFlaggedDumps] = useState<FlaggedDump[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -49,7 +50,6 @@ export const ReviewPage: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [statusFilter, setStatusFilter] = useState<'all' | 'pending' | 'approved' | 'rejected'>('pending');
   
-  const { acceptDumpWithOptimism, rejectDumpWithOptimism } = useDumps();
   const { addToast } = useToast();
 
   // Load flagged dumps
@@ -66,8 +66,11 @@ export const ReviewPage: React.FC = () => {
       if (statusFilter !== 'all') {
         params.status = statusFilter;
       }
+      if (user?.id) {
+        params.userId = user.id;
+      }
 
-      const response = await apiService.get<FlaggedDump[]>('/review/flagged', params);
+      const response = await apiService.get<FlaggedDump[]>('/review/flagged', { params });
       
       console.log('[ReviewPage] API response:', response);
       
@@ -146,13 +149,24 @@ export const ReviewPage: React.FC = () => {
   // Handle approve
   const handleApprove = async (dumpId: string, updates: any) => {
     try {
-      const result = await acceptDumpWithOptimism(dumpId, updates);
-      if (result.success) {
+      // Update dump if there are changes
+      if (updates && (updates.category || updates.notes)) {
+        const updateResponse = await apiService.patch(`/dumps/${dumpId}`, updates);
+        if (!updateResponse.success) {
+          addToast('error', updateResponse.error?.message || 'Failed to update dump');
+          return;
+        }
+      }
+
+      // Accept the dump
+      const response = await apiService.post(`/review/${dumpId}/accept`);
+      
+      if (response.success) {
         addToast('success', t('review.approved'));
         handleModalClose();
         loadFlaggedDumps(); // Reload list
       } else {
-        addToast('error', result.error || t('capture.failedToApprove'));
+        addToast('error', response.error?.message || t('capture.failedToApprove'));
       }
     } catch (err: any) {
       addToast('error', err?.message || t('review.failed'));
@@ -162,13 +176,23 @@ export const ReviewPage: React.FC = () => {
   // Handle reject
   const handleReject = async (dumpId: string, reason?: string) => {
     try {
-      const result = await rejectDumpWithOptimism(dumpId, reason || '');
-      if (result.success) {
+      // Validate reason
+      if (!reason || reason.trim().length < 10) {
+        addToast('error', 'Rejection reason must be at least 10 characters');
+        return;
+      }
+
+      // Call API directly since these dumps are not in DumpsContext
+      const response = await apiService.post(`/review/${dumpId}/reject`, { 
+        rejection_reason: reason.trim() 
+      });
+
+      if (response.success) {
         addToast('success', t('review.rejected'));
         handleModalClose();
         loadFlaggedDumps(); // Reload list
       } else {
-        addToast('error', result.error || t('capture.failedToReject'));
+        addToast('error', response.error?.message || t('capture.failedToReject'));
       }
     } catch (err: any) {
       addToast('error', err?.message || t('review.failed'));
